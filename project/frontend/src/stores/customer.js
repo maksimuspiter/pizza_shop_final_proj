@@ -15,6 +15,7 @@ export const useCuctomerStore = defineStore("customer", () => {
     login: main_api_url + "api-users/login/",
     registr: main_api_url + "api-users/registrations/",
     create_order: main_api_url + "api-order/create/",
+    orders: main_api_url + "api-order/orders/",
   };
   function get_url(url_name) {
     return urls[url_name];

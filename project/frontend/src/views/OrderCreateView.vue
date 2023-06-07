@@ -28,6 +28,7 @@ const order = reactive({
     token: user_data.user_token,
     promocode: '',
 })
+const order_items = reactive({})
 const order_result = reactive({
     active: false,
     message: '',
@@ -44,15 +45,13 @@ function create_order(){
     .then((res) => {
         console.log(res)
         customer.add_data_to_local_storage_after_order(order.name, order.phone_number, order.address)
-        order_result.active=true
-        order_result.message = "Заказ оформлен"
-
+        
+        const order_items = cart.products_in_cart
+        order_result.active = true
+        cart.delete_cart()
     }).catch((err) => {
     console.log(err)
     })
-
-    console.log('create order end')
-
 }
 function validate_data(){
     if(!order.name || !order.phone_number || !order.address ){
@@ -165,8 +164,8 @@ const create_order_button_active = computed(() => {
                     <div 
                     v-if="order_result.active" 
                     class="p-2 mb-4 d-flex flex-wrap justify-content-between border border-success rounded">
-                        <div v-for="product in cart.products_in_cart">
-                            <div><img :src="product.data.image_url" alt="" width="75"></div>
+                        <div v-for="product in order_items">
+                            <div><img :src="product.product_data.image_url" alt="" width="75"></div>
                             
                         </div>
                     </div>
@@ -180,7 +179,7 @@ const create_order_button_active = computed(() => {
                         </div>
 
                         <hr>
-                        <div>
+                        <div v-if="!order_result.active">
                             <div class="d-flex justify-content-between">
                                 <div><span>{{ cart_length}} {{ getProductInCartSuffix() }}</span></div>
                                 <div><span>{{ total_price }} ₽</span></div>

@@ -12,12 +12,14 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = [IsOwnerOrAdmin]
+    authentication_classes = [TokenAuthentication]
 
 
 class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
     permission_classes = [permissions.IsAdminUser]
+    authentication_classes = [TokenAuthentication]
 
 
 class CreateOrderView(generics.CreateAPIView):
