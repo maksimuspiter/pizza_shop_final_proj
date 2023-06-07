@@ -11,7 +11,9 @@ class EmailAlreadyExist(Exception):
 class AccountManager(models.Manager):
     def create_account(self, email, password):
         try:
-            user = User.objects.create(username=email, email=email, password=password)
+            user = User.objects.create(username=email, email=email)
+            user.set_password(password)
+            user.save()
             account = self.model(user=user)
             account.save(using=self._db)
             return account
