@@ -7,7 +7,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 app_name = "users"
 
 router = routers.DefaultRouter()
-# router.register(r'users', views.AccountViewSet, basename='user')
 router.register(r"users", views.AccountViewSet)
 
 
