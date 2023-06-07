@@ -14,5 +14,6 @@ router.register(r"users", views.AccountViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("registrations/", views.RegistrAccountView.as_view(), name="registrations"),
+    path("login/", views.LoginAccountObtainAuthToken.as_view(), name="login"),
 ]
 urlpatterns += staticfiles_urlpatterns()

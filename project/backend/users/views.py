@@ -13,6 +13,9 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_http_methods
 from rest_framework.authtoken.models import Token
 
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.decorators import authentication_classes
+
 
 class AccountViewSet(viewsets.ViewSet):
     queryset = Account.objects.all()
@@ -67,3 +70,8 @@ class RegistrAccountView(CreateAPIView):
         else:
             data["error"] = serializer.errors
             return Response(data, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
+@authentication_classes([])
+class LoginAccountObtainAuthToken(ObtainAuthToken):
+    pass
