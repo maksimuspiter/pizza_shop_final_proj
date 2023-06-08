@@ -72,6 +72,9 @@ class GoodInCartSerializer(serializers.Serializer):
     quantity = serializers.IntegerField(default=1)
 
 
-class AddtocartSerializers(serializers.Serializer):
-    address = serializers.CharField(max_length=200)
+class AddtocartSerializers(serializers.ModelSerializer):
     goods = GoodInCartSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = ("id", "address", "goods")

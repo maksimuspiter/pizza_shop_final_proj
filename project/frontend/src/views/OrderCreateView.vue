@@ -28,7 +28,7 @@ const order = reactive({
     token: user_data.user_token,
     promocode: '',
 })
-const order_items = reactive({})
+const order_items_img = ref([])
 const order_result = reactive({
     active: false,
     message: '',
@@ -45,8 +45,8 @@ function create_order(){
     .then((res) => {
         console.log(res)
         customer.add_data_to_local_storage_after_order(order.name, order.phone_number, order.address)
-        
-        const order_items = cart.products_in_cart
+        order_items_img.value = res.data['order_items_img']
+        console.log(order_items_img)
         order_result.active = true
         cart.delete_cart()
     }).catch((err) => {
@@ -163,9 +163,9 @@ const create_order_button_active = computed(() => {
                     </h3>
                     <div 
                     v-if="order_result.active" 
-                    class="p-2 mb-4 d-flex flex-wrap justify-content-between border border-success rounded">
-                        <div v-for="product in order_items">
-                            <div><img :src="product.product_data.image_url" alt="" width="75"></div>
+                    class="p-2 mb-4 d-flex flex-wrap justify-content-around border border-success rounded">
+                        <div v-for="img in order_items_img">
+                            <div><img :src="img" alt="" width="75"></div>
                             
                         </div>
                     </div>
