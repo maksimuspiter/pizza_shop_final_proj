@@ -39,7 +39,7 @@ class PizzaSerializer(serializers.ModelSerializer):
 
 
 class BasePizzaSerializer(serializers.ModelSerializer):
-    options = PizzaSerializer(many=True, source='pizzas', read_only=True)
+    options = PizzaSerializer(many=True, source="pizzas", read_only=True)
     base_toppings = ToppingSerializer(many=True)
     product_name = serializers.CharField(source="get_pizza_model_name", read_only=True)
     image_url = serializers.URLField(source="get_image")
@@ -55,7 +55,6 @@ class BasePizzaSerializer(serializers.ModelSerializer):
             "description",
             "image_url",
             "min_price",
-
             "base_toppings",
             "options",
         )
@@ -84,24 +83,50 @@ class DesertSerializer(BaseProductSerializer):
             "description",
             "image_url",
             "min_price",
-
             "weight",
         )
 
 
-# class SnackSerializer(BaseProductSerializer):
-#     class Meta:
-#         model = Snack
-#         fields = ("id", "slug", "title", "description", "weight", "get_image", "get_price")
+class SnackSerializer(BaseProductSerializer):
+    class Meta:
+        model = Snack
+        fields = (
+            "id",
+            "slug",
+            "product_name",
+            "title",
+            "description",
+            "image_url",
+            "min_price",
+            "weight",
+        )
 
 
-# class DrinkSerializer(BaseProductSerializer):
-#     class Meta:
-#         model = Drink
-#         fields = ("id", "slug", "title", "description", "weight", "get_image", "get_price")
+class DrinkSerializer(BaseProductSerializer):
+    class Meta:
+        model = Drink
+        fields = (
+            "id",
+            "slug",
+            "product_name",
+            "title",
+            "description",
+            "image_url",
+            "min_price",
+            "weight",
+        )
 
 
-# class OtherSerializer(BaseProductSerializer):
-#     class Meta:
-#         model = Other
-#         fields = ("id", "slug", "title", "description", "weight", "get_image", "get_price")
+class OtherSerializer(BaseProductSerializer):
+    class Meta:
+        model = Other
+        fields = (
+            "id",
+            "slug",
+            "product_name",
+            "title",
+            "description",
+            "image_url",
+            "min_price",
+            "weight",
+        )

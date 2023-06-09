@@ -13,6 +13,11 @@ export const useProductListStore = defineStore("product_list", () => {
   const products_urls = {
     pizzas: main_api_url + "api-pizza/pizzas/",
     deserts: main_api_url + "api-pizza/desert/",
+
+    drink: main_api_url + "api-pizza/drink/",
+    other: main_api_url + "api-pizza/other/",
+    snack: main_api_url + "api-pizza/snack/",
+
   }
 
   const products = reactive({});

@@ -2,26 +2,31 @@ from rest_framework import serializers
 from .models import Order, OrderItem
 from users.serializers import AccountSerializer
 from pizza.models import Pizza, Desert, Snack, Drink, Other
-from pizza.serializers import PizzaSerializer, DesertSerializer
+from pizza.serializers import (
+    PizzaSerializer,
+    DesertSerializer,
+    DrinkSerializer,
+    SnackSerializer,
+    OtherSerializer,
+)
 
 
 class OrderItemsObjectRelatedField(serializers.RelatedField):
     def to_representation(self, value):
-        if isinstance(value, Pizza):
-            serializer = PizzaSerializer(value)
+        match value:
+            case Pizza():
+                serializer = PizzaSerializer(value)
+            case Desert():
+                serializer = DesertSerializer(value)
+            case Snack():
+                serializer = SnackSerializer(value)
+            case Drink():
+                serializer = DrinkSerializer(value)
+            case Other():
+                serializer =OtherSerializer(value)
+            case _:
+                raise Exception("Unexpected type of tagged object")
 
-        elif isinstance(value, Desert):
-            serializer = DesertSerializer(value)
-
-        # elif isinstance(value, Snack):
-        #     serializer =
-        # elif isinstance(value, Drink):
-        #     serializer =
-        # elif isinstance(value, Other):
-        #     serializer =
-
-        else:
-            raise Exception("Unexpected type of tagged object")
         return serializer.data
 
 
