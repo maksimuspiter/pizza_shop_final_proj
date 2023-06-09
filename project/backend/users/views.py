@@ -25,7 +25,7 @@ class AccountViewSet(viewsets.ViewSet):
             serializer = AccountSerializer(self.queryset, many=True)
             return Response(serializer.data)
         else:
-            return Response(status=403)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
     def retrieve(self, request, pk=None):
         queryset = Account.objects.all()
@@ -35,7 +35,7 @@ class AccountViewSet(viewsets.ViewSet):
             if request.user.is_superuser or request.user.account == account:
                 serializer = AccountSerializer(account)
                 return Response(serializer.data)
-        return Response(status=403)
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 class RegistrAccountView(CreateAPIView):
