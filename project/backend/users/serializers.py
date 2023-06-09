@@ -6,15 +6,11 @@ from .models import Account
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ["username", "email", "is_staff"]
-
-
-class AccountSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+        fields = ["username", "email"]
 
     class Meta:
         model = Account
-        fields = ["id", "nickname", "user", "birthday", "created"]
+        fields = ["id", "nickname", "user"]
 
 
 class CreateAccountSerializer(serializers.ModelSerializer):

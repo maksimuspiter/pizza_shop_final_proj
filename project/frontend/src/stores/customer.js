@@ -2,16 +2,12 @@ import { reactive, computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useCuctomerStore = defineStore("customer", () => {
-  // const main_api_url = "http://0.0.0.0:8000" + "/";
   const main_api_url = "http://localhost:8000" + "/";
-  // const main_api_url = "/";
 
   const media_url = main_api_url + "media/";
-  // const media_url  = "/usr/src/app/media/"
   const urls = {
     main: main_api_url,
     main_img_url: media_url + "default_img/pizza_title_main.jpg",
-    // login: main_api_url + "api-token-auth/",
     login: main_api_url + "api-users/login/",
     registr: main_api_url + "api-users/registrations/",
     create_order: main_api_url + "api-order/create/",
