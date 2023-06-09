@@ -10,19 +10,28 @@ const product_name = props.data.product_name
 </script>
 
 <template>
-    <ModalWindow width_window="750" height_window="750" :close_window="close_window">
-
-        <ProductWindowPizza 
+    <div>
+        <ModalWindow 
         v-if="product_name === 'Pizza'" 
-        :data="data"
-        :close_window="close_window" />
+        width_window="750" 
+        height_window="750" 
+        :close_window="close_window">
+            <ProductWindowPizza 
+            :data="data" 
+            :close_window="close_window" />
 
-        <ProductWindowSimple 
+        </ModalWindow>
+        <ModalWindow 
         v-else 
-        :data="data"
-        :close_window="close_window" />
+        width_window="750" 
+        height_window="400" 
+        :close_window="close_window">
 
-    </ModalWindow>
+            <ProductWindowSimple 
+            :data="data" 
+            :close_window="close_window" />
+        </ModalWindow>
+    </div>
 </template>
 
 <style scoped></style>
